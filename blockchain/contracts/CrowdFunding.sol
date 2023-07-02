@@ -45,28 +45,29 @@ contract CrowdFunding {
         uint256 amount  =  msg.value;
 
         Campaign storage campaign = campagins[_id];
-        campaign.donators.push(msg.sender)
-        campaign.donators.push(amount)
+        campaign.donators.push(msg.sender);
+        campaign.donations.push(amount);
 
-        (bool sent) = payable(campaign.owner).call{value : amount}("");
+        (bool sent , ) = payable(campaign.owner).call{value : amount}("");
 
-        if(sent , ){
-            campagin.amountCollected = campagin.amountCollected +  amount;
+        if(sent){
+            campaign.amountCollected = campaign.amountCollected +  amount;
         }
     }
 
     function getDonators(uint256 _id) public view returns (address[] memory , uint256[] memory) {
-        return (campagins[_id].donators ,  campagins[_id].donations)
+        return (campagins[_id].donators ,  campagins[_id].donations);
     }
 
-    function getCampaign() public view return (Campaign[] memory){
-        Campaign[] memory allCampaigns = new Campaign[](numberOfCampagins)
+    function getCampaign() public view returns (Campaign[] memory){
+        Campaign[] memory allCampaigns = new Campaign[](numberOFCampaigns);
 
-        for(uint i = 0 ; i < numberOfCampagins ; i++){
+        for(uint i = 0 ; i < numberOFCampaigns ; i++){
             Campaign storage item =  campagins[i];
 
-            allCampaigns[i] =  items;
+            allCampaigns[i] =  item;
         }
 
         return allCampaigns;
+    }
 }
