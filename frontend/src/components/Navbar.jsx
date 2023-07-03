@@ -31,7 +31,7 @@ export default function Navbar() {
                         <li><Link>Item 3</Link></li>
                     </ul>
                 </div>
-                <Link className="btn btn-ghost normal-case text-xl">CrowdFunding</Link>
+                <Link className="btn btn-ghost text-xs normal-case md:text-xl font-semibold">CrowdFunding</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
