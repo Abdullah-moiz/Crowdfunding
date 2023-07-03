@@ -1,10 +1,24 @@
 import React from 'react'
+import { MdCampaign } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { useForm } from "react-hook-form";
 
 export default function CreateCampaign() {
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm()
+
+
+    const onSubmit = (data) => {
+        console.log(data)
+    }
+
     return (
-        <div className='w-full h-screen bg-slate-950'>
-            <div className="text-sm breadcrumbs text-white">
+        <div className='w-full flex items-center justify-start flex-col  min-h-screen bg-slate-950'>
+            <div className="text-sm flex items-center w-full px-4 justify-start border-b border-b-white breadcrumbs text-white">
                 <ul>
                     <li>
                         <Link to="/">
@@ -18,6 +32,57 @@ export default function CreateCampaign() {
                     </li>
                 </ul>
             </div>
+            <div className='w-full py-4 px-4 flex items-center justify-center'>
+                <h1 className='text-white font-semibold text-2xl border-b py-2 border-b-white flex items-center justify-center'>Start a Campaign <MdCampaign className='text-2xl mx-2 ' /></h1>
+            </div>
+            <form className='w-1/2 ' onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-control w-full mb-2">
+                    <label className="label">
+                        <span className="label-text text-white">Your Name</span>
+                    </label >
+                    <input {...register("name", { required: true })} type="text" placeholder="Type Your Name here" className="input input-bordered w-full" />
+                    {errors.name && <span className='text-red-500 text-xs mt-2'>This field is required</span>}
+                </div >
+                <div className="form-control w-full mb-2">
+                    <label className="label">
+                        <span className="label-text text-white">Campaign Title</span>
+                    </label >
+                    <input {...register("title", { required: true })} type="text" placeholder="Type Campaign Title here" className="input input-bordered w-full" />
+                    {errors.title && <span className='text-red-500 text-xs mt-2'>This field is required</span>}
+                </div >
+                <div className="form-control w-full mb-2">
+                    <label className="label">
+                        <span className="label-text text-white">Story</span>
+                    </label >
+                    <textarea {...register("story", { required: true })} type="text" placeholder="Type Your Name here" className="input input-bordered w-full" />
+                    {errors.story && <span className='text-red-500 text-xs mt-2'>This field is required</span>}
+                </div >
+                <div className="form-control w-full mb-2">
+                    <label className="label">
+                        <span className="label-text text-white">Your Goal</span>
+                    </label >
+                    <input {...register("goal", { required: true })} type="text" placeholder="Type goal Price e.g 500ETH" className="input input-bordered w-full" />
+                    {errors.goal && <span className='text-red-500 text-xs mt-2'>This field is required</span>}
+                </div >
+                <div className="form-control w-full mb-2">
+                    <label className="label">
+                        <span className="label-text text-white">End Date</span>
+                    </label >
+                    <input {...register("date", { required: true })} type="date" placeholder="Type Your Name here" className="input input-bordered w-full" />
+                    {errors.date && <span className='text-red-500 text-xs mt-2'>This field is required</span>}
+                </div >
+                <div className="form-control w-full mb-2">
+                    <label className="label">
+                        <span className="label-text text-white">Campaign Image</span>
+                    </label >
+                    <input accept="image/*" {...register("image", { required: true })} type="file" placeholder="Type Your Name here" className="input input-bordered w-full" />
+                    {errors.image && <span className='text-red-500 text-xs mt-2'>This field is required</span>}
+                </div >
+                <div className='w-full  items-center justify-center flex py-2'>
+                    <button type='submit' className='btn  btn-wide btn-neutral'>Done !</button>
+                </div>
+            </form>
+
         </div>
     )
 }

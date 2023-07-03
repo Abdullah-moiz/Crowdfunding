@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdCampaign } from 'react-icons/md'
 import {useDispatch} from 'react-redux'
@@ -7,6 +7,7 @@ import { setOpenSearch } from '../slices/NavSlices'
 
 export default function Navbar() {
     const dispatch =  useDispatch();
+    const navigate =  useNavigate();
     
     const HandleSearch = () => {
         dispatch(setOpenSearch(true))
@@ -49,7 +50,7 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-                <button className='btn btn-neutral text-white mx-2 btn-circle'> <MdCampaign className="text-2xl" /></button>
+                <button onClick={() => navigate('/create-campaign')} className='btn btn-neutral text-white mx-2 btn-circle'> <MdCampaign className="text-2xl" /></button>
                 <button onClick={HandleSearch} className='btn btn-neutral text-white mx-2 btn-circle'> <AiOutlineSearch className="text-2xl" /></button>
             </div>
         </div>
