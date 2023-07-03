@@ -5,16 +5,22 @@ import App from "./App";
 import { ThirdwebProvider } from "@thirdweb-dev/react";
 import "./styles/globals.css";
 import { BrowserRouter } from 'react-router-dom'
+import { store } from "./store/store";
+import { Provider } from 'react-redux'
 
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <ThirdwebProvider  activeChain={ Sepolia }>
-      <BrowserRouter >
-        <App />
-      </BrowserRouter>
-    </ThirdwebProvider>
+
+    <Provider store={store}>
+      <ThirdwebProvider activeChain={Sepolia}>
+        <BrowserRouter >
+          <App />
+        </BrowserRouter>
+      </ThirdwebProvider>
+    </Provider>
+
   </React.StrictMode>
 );
