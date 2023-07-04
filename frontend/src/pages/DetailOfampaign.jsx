@@ -19,12 +19,12 @@ export default function DetailOfampaign() {
         </ul>
       </div>
 
-      <div className='w-full h-4/5 flex items-center  justify-center mt-4 flex-col border-2'>
-        <div className='w-full h-96  items-center justify-center px-4  flex '>
-          <div className='w-2/3  h-full '>
+      <div className='w-full md:h-4/5 flex items-center  justify-center mt-4 flex-col  py-4'>
+        <div className='w-full md:h-96  items-center justify-center px-2 md:px-4  flex md:flex-row flex-col '>
+          <div className='md:w-2/3 w-full h-full '>
             <img className='w-full h-full' src="https://www.befunky.com/images/prismic/1f427434-7ca0-46b2-b5d1-7d31843859b6_funky-focus-red-flower-field-after.jpeg?auto=avif,webp&format=jpg&width=863" alt="Shoes" />
           </div>
-          <div className='w-1/3  flex flex-col items-center justify-center h-full '>
+          <div className='md:w-1/3 w-full flex md:flex-col flex-wrap items-center justify-center h-full '>
             <div className='w-32 flex items-center justify-center flex-col my-2 mx-4 py-3 px-2 bg-slate-800 text-white rounded-md'>
               <h1 className='text-4xl my-2 font-semibold '>06</h1>
               <p className='text-sm '>Days Left</p>
@@ -41,8 +41,8 @@ export default function DetailOfampaign() {
 
         </div>
 
-        <div className='w-full h-96 px-4 flex  items-center justify-center'>
-          <div className='w-2/3 px-2 h-full '>
+        <div className='w-full py-4 m-4 md:h-96 px-2 md:px-4 flex  items-center justify-center md:flex-row flex-col'>
+          <div className='w-full md:w-2/3 px-2 h-full '>
             <div className='w-full bg-slate-800 text-white px-5 py-4 rounded-md my-3'>
               <h1 className='text-3xl font-semibold  '>Story</h1>
               <p className='  my-3'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui voluptate perferendis saepe sapiente optio assumenda dicta nam aliquid, rem officia magnam quisquam praesentium laudantium aliquam sequi molestiae facere nisi excepturi?</p>
@@ -52,7 +52,7 @@ export default function DetailOfampaign() {
               <p className='  my-3'>1.0xhud784jfiodsf80urnvdi04ur239i4kdwfjfds</p>
             </div>
           </div>
-          <div className='w-1/3  text-white px-2 h-full'>
+          <div className='md:w-1/3  w-full text-white px-2 h-full'>
             <h1 className='text-3xl font-semibold  '>Transfer Funds</h1>
             <div className='w-full bg-slate-800 flex items-center justify-center flex-col text-white px-5 py-4 rounded-md my-3'>
               <h1 className='text-white/60'>Pledge Without Reward</h1>
