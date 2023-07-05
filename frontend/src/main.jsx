@@ -6,6 +6,7 @@ import { ThirdwebProvider } from "@thirdweb-dev/react";
 import "./styles/globals.css";
 import { BrowserRouter } from 'react-router-dom'
 import { store } from "./store/store";
+import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from 'react-redux'
 
 
