@@ -1,5 +1,6 @@
-import React from 'react'
-import { Navbar, Footer, Search, Campaign } from '../components'
+import React from 'react';
+import { Navbar, Footer, Search, Campaign } from '../components';
+
 
 export default function Landing() {
     return (

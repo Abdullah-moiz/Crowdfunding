@@ -2,9 +2,17 @@ import React from 'react'
 import { MdCampaign } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { useForm } from "react-hook-form";
+import { useContract, useContractWrite } from "@thirdweb-dev/react";
+import { toast, ToastContainer } from 'react-toastify'
+import { useSelector } from 'react-redux';
 
 export default function CreateCampaign() {
 
+    const { contract } = useContract("0x853C53E1BaAe5bb341fC0Ac7Ff67B932a7F6fe58");
+    const { mutateAsync: createCampaign, isLoading } = useContractWrite(contract, "createCampaign")
+    const address =  useSelector(state => state.Contract.address)
+
+    console.log(address)
     const {
         register,
         handleSubmit,
@@ -12,9 +20,29 @@ export default function CreateCampaign() {
     } = useForm()
 
 
-    const onSubmit = (data) => {
-        console.log(data)
+    const onSubmit = async (data) => {
+
+        
+        const _owner = data.name;
+        const _title = data.title;
+        const _description = data.story;
+        const _target = data.goal;
+        const _deadline = data.date;
+
+        try {
+            const data = await createCampaign({ args: [_owner, _title, _description, _target, _deadline, _image] });
+            toast.success('Campaign Created Successfully')
+            console.info("contract call successs", data);
+        } catch (err) {
+            toast.error('Campaign Creation Failed')
+            console.error("contract call failure", err);
+        }
     }
+
+
+
+
+
 
     return (
         <div className='w-full flex items-center justify-start flex-col  min-h-screen bg-slate-950'>
@@ -82,7 +110,10 @@ export default function CreateCampaign() {
                     <button type='submit' className='btn  btn-wide btn-neutral'>Done !</button>
                 </div>
             </form>
-
+            <ToastContainer />
         </div>
     )
 }
+
+
+

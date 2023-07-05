@@ -14,7 +14,7 @@ export const navigationSlice = createSlice({
     },
 })
 
-// Action creators are generated for each case reducer function
+
 export const { setOpenSearch } = navigationSlice.actions
 const NavigationReducer =  navigationSlice.reducer
 export default NavigationReducer;
