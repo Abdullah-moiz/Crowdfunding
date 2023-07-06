@@ -1,9 +1,10 @@
 import React from 'react'
 import { ethers } from 'ethers';
 import { daysLeft } from '../utils';
+import ImageLoader from './ImageLoader';
 
 export default function CampaignCard({ campaign }) {
-
+    const [loadImage, setLoadImage] = React.useState(true)
     const target = ethers.utils.formatEther(campaign?.target?.toString())
     const amountCollected = ethers.utils.formatEther(campaign?.amountCollected?.toString())
 
@@ -13,8 +14,11 @@ export default function CampaignCard({ campaign }) {
 
     return (
         <div className="card m-3 w-96 bg-base-100 shadow-xl">
-            <figure><img src={campaign?.image} alt="Shoes" /></figure>
-            <div className="card-body">
+            {
+                loadImage && <figure><ImageLoader /></figure> 
+            }
+             <figure><img src={campaign?.image} alt="Shoes" className={`${!loadImage ? "flex" : "hidden"}  h-60 w-full`} onLoad={() => setLoadImage(false)} /></figure>
+            <div className="card-body  ">
                 <p>Education</p>
                 <h2 className="card-title">
                     {campaign?.title}

@@ -34,7 +34,7 @@ export default function Search() {
 
     return (
         <div className={`${search ? "flex" : "hidden"} relative w-full my-2  flex-col h-24  px-4  items-center justify-center `}>
-            <input onChange={(e) => setSearchText(e.target.value)} type="text" id='search' placeholder="Search Campagins..." className="input input-bordered input-secondary w-full max-w-xs" />
+            <input onChange={(e) => setSearchText(e.target.value)} type="search" id='search' placeholder="Search Campagins..." className="input input-bordered input-secondary w-full max-w-xs" />
             <button onClick={HandleSearch} className='btn btn-circle  absolute top-2 btn-neutral text-red-600 right-5 md:right-20 '><ImCross /></button>
         </div>
     )
