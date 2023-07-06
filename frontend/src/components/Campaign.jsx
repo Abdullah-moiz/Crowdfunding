@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import Loading from './Loading'
 
 export default function Campaign() {
-  const data = useSelector(state => state.Contract.contractData)
+  const campaignData= useSelector(state => state.Contract.contractData)
+  const data = campaignData?.slice(6)
   const isLoading = useSelector(state => state.Contract.isLoading)
 
   return (

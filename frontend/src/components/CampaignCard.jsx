@@ -13,7 +13,7 @@ export default function CampaignCard({ campaign }) {
 
     return (
         <div className="card m-3 w-96 bg-base-100 shadow-xl">
-            <figure><img src="https://www.befunky.com/images/prismic/1f427434-7ca0-46b2-b5d1-7d31843859b6_funky-focus-red-flower-field-after.jpeg?auto=avif,webp&format=jpg&width=863" alt="Shoes" /></figure>
+            <figure><img src={campaign?.image} alt="Shoes" /></figure>
             <div className="card-body">
                 <p>Education</p>
                 <h2 className="card-title">

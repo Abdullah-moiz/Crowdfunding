@@ -24,7 +24,7 @@ export default function Landing() {
             <Navbar />
             <Search />
             <div className='w-full h-full px-2  overflow-auto py-2'>
-                <h1 className=' text-white font-semibold py-2'>All Campaigns ({data?.length}) </h1>
+                <h1 className=' text-white font-semibold py-2'>All Campaigns ({data?.slice(6)?.length }) </h1>
                 <Campaign />
             </div>
             <Footer />
