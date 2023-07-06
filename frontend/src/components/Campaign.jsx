@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import Loading from './Loading'
 
 export default function Campaign() {
-  const campaignData= useSelector(state => state.Contract.contractData)
+  const campaignData = useSelector(state => state.Contract.contractData)
+  const filteredCampaigns = useSelector(state => state.Contract.filterCampaigns)
   const data = campaignData?.slice(6)
   const isLoading = useSelector(state => state.Contract.isLoading)
 
@@ -17,7 +18,9 @@ export default function Campaign() {
         !isLoading && data.length === 0 && <h1 className='text-2xl font-semibold text-white'>No Campaigns Found</h1>
       }
       {
-        data && data.map((campaign, index) => {
+        filteredCampaigns !== null ? filteredCampaigns.map((campaign, index) => {
+          return <CampaignCard key={index} campaign={campaign} />
+        }) : data?.map((campaign, index) => {
           return <CampaignCard key={index} campaign={campaign} />
         })
       }

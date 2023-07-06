@@ -7,6 +7,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     address : null,
     contractData : [],
+    filterCampaigns : null,
     isLoading : false,
 
 }
@@ -24,11 +25,15 @@ export const contractSlice = createSlice({
         },
         setIsLoading: (state, actions) => {
             state.isLoading = actions.payload
+        },
+        setFilteredCampaigns: (state, actions) => {
+            state.filterCampaigns = actions.payload
         }
+
 
     },
 })
 
-export const { setAddress , setContractData ,setIsLoading } = contractSlice.actions
+export const { setAddress , setContractData ,setIsLoading  , setFilteredCampaigns} = contractSlice.actions
 const contractReducer =  contractSlice.reducer
 export default contractReducer;
