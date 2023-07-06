@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { Navbar, Footer, Search, Campaign } from '../components';
 import { useContract, useContractRead } from '@thirdweb-dev/react';
+import { useDispatch } from 'react-redux';
+import { setContractData , setIsLoading} from '../slices/smartContractSlice';
 
 
 export default function Landing() {
+    const dispatch  =  useDispatch();
 
     const { contract } = useContract("0x853C53E1BaAe5bb341fC0Ac7Ff67B932a7F6fe58");
 
@@ -11,9 +14,9 @@ export default function Landing() {
 
 
 
-
     useEffect(() => {
-        console.log(data);
+        dispatch(setIsLoading(isLoading))
+        dispatch(setContractData(data))
     }, [data]);
 
     return (
@@ -21,7 +24,7 @@ export default function Landing() {
             <Navbar />
             <Search />
             <div className='w-full h-full px-2  overflow-auto py-2'>
-                <h1 className=' text-white font-semibold py-2'>All Campaigns (5) </h1>
+                <h1 className=' text-white font-semibold py-2'>All Campaigns ({data?.length}) </h1>
                 <Campaign />
             </div>
             <Footer />

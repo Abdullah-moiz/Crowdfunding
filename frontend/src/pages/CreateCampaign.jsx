@@ -6,6 +6,7 @@ import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import { toast, ToastContainer } from 'react-toastify'
 import { useSelector } from 'react-redux';
 import { Loading } from '../components';
+import { checkIfImage } from '../utils';
 
 
 export default function CreateCampaign() {
@@ -30,12 +31,14 @@ export default function CreateCampaign() {
 
     const onSubmit = async (data) => {
 
+        if(checkIfImage(data.image) === false) return toast.error('Please enter a valid image url'  )   
+
         const _owner = address;
         const _title = data.title;
         const _description = data.story;
         const _target = data.goal;
         const _deadline = new Date(data.date).getTime();
-        const _image = data.image[0].name;
+        const _image = data.image;
 
         console.log(_owner, _title, _description, _target, _deadline, _image)
 
@@ -110,7 +113,7 @@ export default function CreateCampaign() {
                         <label className="label">
                             <span className="label-text text-white">Campaign Image</span>
                         </label >
-                        <input accept="image/*" {...register("image", { required: true })} type="file" placeholder="Type Your Name here" className="input input-bordered w-full" />
+                        <input {...register("image", { required: true })} type="text" placeholder="Type Your Name here" className="input input-bordered w-full" />
                         {errors.image && <span className='text-red-500 text-xs mt-2'>This field is required</span>}
                     </div >
                     <div className='w-full  items-center justify-center flex py-2'>
