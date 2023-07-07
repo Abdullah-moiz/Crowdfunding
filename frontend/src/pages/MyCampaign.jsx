@@ -1,8 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Campaign } from '../components'
+import { useSelector } from 'react-redux'
 
 export default function MyCampaign() {
+
+    const myAddress = useSelector(state => state.Contract.address);
+    const allCampaign = useSelector(state => state.Contract.contractData);
+
+
+    const MyCampaign = allCampaign?.filter((mYCamp) => {
+        if (mYCamp.owner === myAddress) {
+            return mYCamp;
+        }
+    })
+
+    console.log(MyCampaign)
+
+
+
+
+
+
     return (
         <div className='w-full  bg-slate-950 min-h-screen'>
             <div className="text-sm flex items-center w-full px-4 justify-start border-b border-b-white breadcrumbs text-white">
@@ -21,6 +40,7 @@ export default function MyCampaign() {
             </div>
             <div className='w-full h-full px-2  overflow-auto py-2'>
                 <h1 className=' text-white font-semibold py-2'>My Campaigns (5) </h1>
+
                 <Campaign />
             </div>
         </div>

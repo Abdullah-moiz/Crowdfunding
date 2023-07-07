@@ -6,7 +6,8 @@ import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import { toast, ToastContainer } from 'react-toastify'
 import { useSelector } from 'react-redux';
 import { Loading } from '../components';
-import { checkIfImage } from '../utils';
+
+
 
 
 export default function CreateCampaign() {
@@ -19,9 +20,6 @@ export default function CreateCampaign() {
         if (!address) return navigate('/')
     }, [address])
 
-
-    console.log(address)
-
     const {
         register,
         handleSubmit,
@@ -31,25 +29,32 @@ export default function CreateCampaign() {
 
     const onSubmit = async (data) => {
 
-        if(checkIfImage(data.image) === false) return toast.error('Please enter a valid image url'  )   
+        const urlPattern = /^(ftp|http|https):\/\/[^ "]+$/;
 
-        const _owner = address;
-        const _title = data.title;
-        const _description = data.story;
-        const _target = data.goal;
-        const _deadline = new Date(data.date).getTime();
-        const _image = data.image;
+        if (urlPattern.test(data.image)) {
+            const _owner = address;
+            const _title = data.title;
+            const _description = data.story;
+            const _target = data.goal;
+            const _deadline = new Date(data.date).getTime();
+            const _image = data.image;
 
-        console.log(_owner, _title, _description, _target, _deadline, _image)
-
-        try {
-            const data = await createCampaign({ args: [_owner, _title, _description, _target, _deadline, _image] });
-            toast.success('Campaign Created Successfully')
-            console.info("contract call successs", data);
-        } catch (err) {
-            toast.error('Campaign Creation Failed')
-            console.error("contract call failure", err);
+            try {
+                const data = await createCampaign({ args: [_owner, _title, _description, _target, _deadline, _image] });
+                toast.success('Campaign Created Successfully')
+                console.info("contract call successs", data);
+            } catch (err) {
+                toast.error('Campaign Creation Failed')
+                console.error("contract call failure", err);
+            }
+        } else {
+            return toast.error("Please Enter Image URL")
         }
+
+
+
+
+
     }
 
 
