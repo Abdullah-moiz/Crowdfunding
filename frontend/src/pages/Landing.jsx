@@ -3,6 +3,7 @@ import { Navbar, Footer, Search, Campaign } from '../components';
 import { useContract, useContractRead } from '@thirdweb-dev/react';
 import { useDispatch } from 'react-redux';
 import { setContractData , setIsLoading} from '../slices/smartContractSlice';
+import { toast , ToastContainer } from 'react-toastify';
 
 
 export default function Landing() {
@@ -12,8 +13,10 @@ export default function Landing() {
 
     const { data, isLoading, error } = useContractRead(contract, "getCampaign");
 
+    if(error) toast.error(error.message);
 
-
+    console.log(data)
+    
     useEffect(() => {
         dispatch(setIsLoading(isLoading))
         dispatch(setContractData(data))
@@ -28,6 +31,7 @@ export default function Landing() {
                 <Campaign />
             </div>
             <Footer />
+            <ToastContainer />
         </div>
     )
 }

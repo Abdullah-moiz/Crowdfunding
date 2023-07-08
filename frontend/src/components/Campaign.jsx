@@ -10,7 +10,7 @@ export default function Campaign() {
   const isLoading = useSelector(state => state.Contract.isLoading)
 
   return (
-    <div className='w-full mt-4 h-5/6  flex flex-wrap items-start justify-center'>
+    <div className='w-full mt-4 h-5/6 justify-center flex flex-wrap '>
       {
         isLoading && <Loading />
       }

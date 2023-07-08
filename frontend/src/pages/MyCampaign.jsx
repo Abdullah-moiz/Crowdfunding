@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Campaign } from '../components'
+import { CampaignCard } from '../components'
 import { useSelector } from 'react-redux'
 
 export default function MyCampaign() {
@@ -10,17 +10,11 @@ export default function MyCampaign() {
 
 
     const MyCampaign = allCampaign?.filter((mYCamp) => {
+        
         if (mYCamp.owner === myAddress) {
             return mYCamp;
         }
     })
-
-    console.log(MyCampaign)
-
-
-
-
-
 
     return (
         <div className='w-full  bg-slate-950 min-h-screen'>
@@ -38,11 +32,18 @@ export default function MyCampaign() {
                     </li>
                 </ul>
             </div>
-            <div className='w-full h-full px-2  overflow-auto py-2'>
-                <h1 className=' text-white font-semibold py-2'>My Campaigns (5) </h1>
+            <div className='w-full h-full px-2  py-2'>
+                <h1 className=' text-white font-semibold py-2'>My Campaigns {(MyCampaign?.length)} </h1>
+                <div className='w-full flex  flex-wrap h-[790px] overflow-auto '>
 
-                <Campaign />
+                    {
+                        MyCampaign?.map((campaign, index) => {
+                            return <CampaignCard key={index} campaign={campaign} />
+                        })
+                    }
+                </div>
+
             </div>
-        </div>
+        </div >
     )
 }

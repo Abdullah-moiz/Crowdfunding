@@ -2,8 +2,10 @@ import React from 'react'
 import { ethers } from 'ethers';
 import { daysLeft } from '../utils';
 import ImageLoader from './ImageLoader';
+import { useNavigate } from 'react-router-dom';
 
 export default function CampaignCard({ campaign }) {
+    const navigate =  useNavigate()
     const [loadImage, setLoadImage] = React.useState(true)
     const target = ethers.utils.formatEther(campaign?.target?.toString())
     const amountCollected = ethers.utils.formatEther(campaign?.amountCollected?.toString())
@@ -13,11 +15,13 @@ export default function CampaignCard({ campaign }) {
 
 
     return (
-        <div className="card m-3 w-96 bg-base-100 shadow-xl">
-            {
-                loadImage && <figure><ImageLoader /></figure> 
-            }
-             <figure><img src={campaign?.image} alt="Shoes" className={`${!loadImage ? "flex" : "hidden"}  h-60 w-full`} onLoad={() => setLoadImage(false)} /></figure>
+        <div onClick={() => navigate(`/detail-of-campaign/${campaign?.title}`)} className="card m-3  w-96 h-[450px] rounded bg-base-100 shadow-xl">
+            <div className='w-full h-52  relative'>
+                {
+                    loadImage && <figure><ImageLoader /></figure>
+                }
+                <img src={campaign?.image} alt="Shoes" className={`${!loadImage ? "flex" : "hidden"}  h-full w-full`} onLoad={() => setLoadImage(false)} />
+            </div>
             <div className="card-body  ">
                 <p>Education</p>
                 <h2 className="card-title">
