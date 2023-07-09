@@ -10,12 +10,12 @@ export default function CampaignCard({ campaign }) {
     const target = ethers.utils.formatEther(campaign?.target?.toString())
     const amountCollected = ethers.utils.formatEther(campaign?.amountCollected?.toString())
 
-    const numTarget = Number(target)
-    const numAmountCollected = Number(amountCollected)
+    const numTarget = Number(target) * 10000000000000000
+    const numAmountCollected = Number(amountCollected) * 10000000000000000
 
 
     return (
-        <div onClick={() => navigate(`/detail-of-campaign/${campaign?.title}`)} className="card m-3  w-96 h-[450px] rounded bg-base-100 shadow-xl">
+        <div onClick={() => navigate(`/detail-of-campaign/${campaign?.title.replace(/ /g, '')+campaign?.owner}`)} className="card m-3  w-96 h-[450px] rounded bg-base-100 shadow-xl">
             <div className='w-full h-52  relative'>
                 {
                     loadImage && <figure><ImageLoader /></figure>
@@ -30,8 +30,8 @@ export default function CampaignCard({ campaign }) {
                 <p>{campaign?.description}</p>
                 <div className="card-actions justify-between px-2">
                     <div className="items-center justify-center flex flex-col">
-                        <h1 className='text-2xl font-semibold'>{numAmountCollected.toFixed(3)}</h1>
-                        <p className='text-sm'>Raised of {numTarget.toFixed(3)}</p>
+                        <h1 className='text-2xl font-semibold'>{numAmountCollected}</h1>
+                        <p className='text-sm'>Raised of {numTarget}</p>
                     </div>
                     <div className="items-center justify-center flex flex-col">
                         {
