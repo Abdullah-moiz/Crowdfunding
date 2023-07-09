@@ -11,7 +11,7 @@ export default function CampaignCard({ campaign }) {
     const amountCollected = ethers.utils.formatEther(campaign?.amountCollected?.toString())
 
     const numTarget = Number(target) * 10000000000000000
-    const numAmountCollected = Number(amountCollected) * 10000000000000000
+    const numAmountCollected = Number(amountCollected) 
 
 
     return (

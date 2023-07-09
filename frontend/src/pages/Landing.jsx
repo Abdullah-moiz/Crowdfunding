@@ -14,8 +14,6 @@ export default function Landing() {
     const { data, isLoading, error } = useContractRead(contract, "getCampaign");
 
     if(error) toast.error(error.message);
-
-    console.log(data)
     
     useEffect(() => {
         dispatch(setIsLoading(isLoading))

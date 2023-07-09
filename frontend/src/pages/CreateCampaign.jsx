@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { MdCampaign } from 'react-icons/md'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link,  useNavigate } from 'react-router-dom'
 import { useForm } from "react-hook-form";
 import { useContract, useContractWrite } from "@thirdweb-dev/react";
 import { toast, ToastContainer } from 'react-toastify'
@@ -42,19 +42,16 @@ export default function CreateCampaign() {
             try {
                 const data = await createCampaign({ args: [_owner, _title, _description, _target, _deadline, _image] });
                 toast.success('Campaign Created Successfully')
-                console.info("contract call successs", data);
+                setTimeout(() => {
+                    navigate('/')
+                } , 500)
+
             } catch (err) {
                 toast.error('Campaign Creation Failed')
-                console.error("contract call failure", err);
             }
         } else {
             return toast.error("Please Enter Image URL")
         }
-
-
-
-
-
     }
 
 

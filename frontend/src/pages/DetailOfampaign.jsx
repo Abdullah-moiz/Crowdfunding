@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { ethers } from 'ethers';
 import { daysLeft } from '../utils';
@@ -9,10 +9,10 @@ import { toast, ToastContainer } from 'react-toastify'
 
 
 export default function DetailOfampaign() {
-  const ownerAddress = useSelector(state => state.Contract.address);
+  const navigate =  useNavigate()
   const [donationAmount, setDonationAmount] = useState(0);
   const { contract } = useContract("0x853C53E1BaAe5bb341fC0Ac7Ff67B932a7F6fe58");
-  const { mutateAsync: donateToCampaign, isLoading } = useContractWrite(contract, "donateToCampaign")
+  const [loading , setLoading] = useState(false)
   const allCampaign = useSelector(state => state.Contract.contractData);
   const [loadImage, setLoadImage] = React.useState(true)
  
@@ -43,19 +43,24 @@ export default function DetailOfampaign() {
   const amountCollected = ethers.utils.formatEther(thisCampagin[0]?.amountCollected?.toString())
 
   const numTarget = Number(target) * 10000000000000000
-  const numAmountCollected = Number(amountCollected) * 10000000000000000
+  const numAmountCollected = Number(amountCollected) 
 
 
   const call = async () => {
 
     if (indexOfthisCampaign && donationAmount > 0) {
       try {
-        const data = await donateToCampaign({ args: [indexOfthisCampaign], value: ethers.utils.parseEther(donationAmount) });
-        toast.success("Donated Successfully")
-        console.info("contract call successs", data);
+        setLoading(true)
+        const data = await contract.call('donateToCampaign', [indexOfthisCampaign], { value: ethers.utils.parseEther(donationAmount)});
+        toast.success('Donated Successfully')
+        setTimeout(() => {
+          navigate('/')
+        }, 500);
       } catch (err) {
         toast.error("Donated Unsuccessfull Please Retry !")
-        console.error("contract call failure", err);
+   
+      } finally {
+        setLoading(false)
       }
 
     } else {
@@ -66,11 +71,11 @@ export default function DetailOfampaign() {
 
 
 
-console.log(thisCampagin[0])
+
   return (
     <>
       {
-        isLoading && <Loading />
+        loading && <Loading />
       }
       <div className='w-full flex items-center justify-start flex-col  min-h-screen bg-slate-950'>
         <div className="text-sm flex items-center w-full px-4 justify-start border-b border-b-white breadcrumbs text-white">
@@ -125,13 +130,13 @@ console.log(thisCampagin[0])
                 <p className='  my-3'>{thisCampagin[0].description} . Qui voluptate perferendis saepe sapiente optio assumenda dicta nam aliquid, rem officia magnam quisquam praesentium laudantium aliquam sequi molestiae facere nisi excepturi?</p>
               </div>
               <div className='w-full  bg-slate-800 text-white px-5 py-4 rounded-md my-3'>
+                <h1 className='text-3xl font-semibold  '>Donators</h1>
                 {
                   thisCampagin[0]?.donators?.length > 0
                     ? thisCampagin[0]?.donators?.map((item, index) => {
                  
                       return (
                         <>
-                          <h1 className='text-3xl font-semibold  '>Donators</h1>
 
                           <p className='  my-3'>{item}</p>
                         </>
@@ -140,7 +145,6 @@ console.log(thisCampagin[0])
                     })
                     :
                     <>
-                      <h1 className='text-3xl font-semibold  '>Donators</h1>
                       <p className='  my-3'>No Donators Found</p>
                     </>
 
