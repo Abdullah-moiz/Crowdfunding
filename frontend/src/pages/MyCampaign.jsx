@@ -34,7 +34,7 @@ export default function MyCampaign() {
             </div>
             <div className='w-full h-full px-2  py-2'>
                 <h1 className=' text-white font-semibold py-2'>My Campaigns {(MyCampaign?.length)} </h1>
-                <div className='w-full flex  flex-wrap h-[790px] overflow-auto '>
+                <div className='w-full flex items-center justify-center  flex-wrap h-[790px] overflow-auto '>
 
                     {
                         MyCampaign?.map((campaign, index) => {

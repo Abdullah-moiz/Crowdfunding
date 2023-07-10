@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify'
 
 
 export default function DetailOfampaign() {
+  const myAddress = useSelector(state => state.Contract.address);
   const navigate =  useNavigate()
   const [donationAmount, setDonationAmount] = useState(0);
   const { contract } = useContract("0x853C53E1BaAe5bb341fC0Ac7Ff67B932a7F6fe58");
@@ -47,6 +48,9 @@ export default function DetailOfampaign() {
 
 
   const call = async () => {
+
+    if(!myAddress) return toast.error("Please Connect Your Wallet First")
+
 
     if (indexOfthisCampaign && donationAmount > 0) {
       try {
