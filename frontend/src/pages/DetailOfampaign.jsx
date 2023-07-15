@@ -10,13 +10,13 @@ import { toast, ToastContainer } from 'react-toastify'
 
 export default function DetailOfampaign() {
   const myAddress = useSelector(state => state.Contract.address);
-  const navigate =  useNavigate()
+  const navigate = useNavigate()
   const [donationAmount, setDonationAmount] = useState(0);
   const { contract } = useContract("0x853C53E1BaAe5bb341fC0Ac7Ff67B932a7F6fe58");
-  const [loading , setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
   const allCampaign = useSelector(state => state.Contract.contractData);
   const [loadImage, setLoadImage] = React.useState(true)
- 
+
 
   const { id } = useParams()
   const regex = /(.*?)(0x[A-Fa-f0-9]+)/;
@@ -44,25 +44,25 @@ export default function DetailOfampaign() {
   const amountCollected = ethers.utils.formatEther(thisCampagin[0]?.amountCollected?.toString())
 
   const numTarget = Number(target) * 10000000000000000
-  const numAmountCollected = Number(amountCollected) 
+  const numAmountCollected = Number(amountCollected)
 
 
   const call = async () => {
 
-    if(!myAddress) return toast.error("Please Connect Your Wallet First")
+    if (!myAddress) return toast.error("Please Connect Your Wallet First")
 
 
     if (indexOfthisCampaign && donationAmount > 0) {
       try {
         setLoading(true)
-        const data = await contract.call('donateToCampaign', [indexOfthisCampaign], { value: ethers.utils.parseEther(donationAmount)});
+        const data = await contract.call('donateToCampaign', [indexOfthisCampaign], { value: ethers.utils.parseEther(donationAmount) });
         toast.success('Donated Successfully')
         setTimeout(() => {
           navigate('/')
         }, 500);
       } catch (err) {
         toast.error("Donated Unsuccessfull Please Retry !")
-   
+
       } finally {
         setLoading(false)
       }
@@ -131,18 +131,17 @@ export default function DetailOfampaign() {
             <div className='w-full md:w-2/3 px-2 h-full '>
               <div className='w-full bg-slate-800 text-white px-5 py-4 rounded-md my-3'>
                 <h1 className='text-3xl font-semibold  '>Story</h1>
-                <p className='  my-3'>{thisCampagin[0].description} . Qui voluptate perferendis saepe sapiente optio assumenda dicta nam aliquid, rem officia magnam quisquam praesentium laudantium aliquam sequi molestiae facere nisi excepturi?</p>
+                <p className=' text-sm md:text-base leading-6 my-3'>{thisCampagin[0].description} . Qui voluptate perferendis saepe sapiente optio assumenda dicta nam aliquid, rem officia magnam quisquam praesentium laudantium aliquam sequi molestiae facere nisi excepturi?</p>
               </div>
               <div className='w-full  bg-slate-800 text-white px-5 py-4 rounded-md my-3'>
                 <h1 className='text-3xl font-semibold  '>Donators</h1>
                 {
                   thisCampagin[0]?.donators?.length > 0
                     ? thisCampagin[0]?.donators?.map((item, index) => {
-                 
+
                       return (
                         <>
-
-                          <p className='  my-3'>{item}</p>
+                          <p className='leading-4 text-[0.65rem] md:text-base  my-3'>{item}</p>
                         </>
 
                       )
