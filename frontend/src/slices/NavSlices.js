@@ -14,6 +14,7 @@ export const navigationSlice = createSlice({
     },
 })
 
+//  testing
 
 export const { setOpenSearch } = navigationSlice.actions
 const NavigationReducer =  navigationSlice.reducer
